@@ -1,0 +1,40 @@
+h1 {
+  margin-bottom: 50px;
+}
+
+.movie__images {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 380px;
+  margin-bottom: 20px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.movie__trailer {
+  height: 100%;
+  aspect-ratio: 16/9;
+}
+
+.movie__poster {
+  height: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+}
+
+.movie-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.movie-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.movie-container td {
+  padding: 5px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}

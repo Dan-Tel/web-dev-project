@@ -1,0 +1,44 @@
+<ng-container *ngIf="movie">
+  <h1>{{ movie.title }} ({{ movie.release_year }})</h1>
+
+  <div class="movie-detail">
+    <div class="movie__images">
+      <iframe
+        class="movie__trailer"
+        [src]="trailerUrl()"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+      <img class="movie__poster" [src]="movie.poster_url" [alt]="movie.title" />
+    </div>
+    <div class="movie-container">
+      <table>
+        <tbody>
+          <tr>
+            <td>Genres</td>
+            <td>{{ movie.genres.join(", ") }}</td>
+          </tr>
+          <tr>
+            <td>Director</td>
+            <td>{{ movie.director }}</td>
+          </tr>
+          <tr>
+            <td>Release year</td>
+            <td>{{ movie.release_year }}</td>
+          </tr>
+          <tr>
+            <td>Rating</td>
+            <td>{{ movie.rating }}</td>
+          </tr>
+          <tr>
+            <td>Duration</td>
+            <td>{{ movie.duration }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-container>
