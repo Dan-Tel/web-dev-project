@@ -1,0 +1,7 @@
+<h2>WHAT DO YOU LIKE?</h2>
+
+<ul class="genre-list">
+  <li class="genre-card" *ngFor="let g of genres" routerLink="/{{ g.id }}">
+    {{ g.name }}
+  </li>
+</ul>

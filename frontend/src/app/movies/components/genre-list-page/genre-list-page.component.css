@@ -1,0 +1,24 @@
+h2 {
+  margin-bottom: 50px;
+}
+
+.genre-list {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.genre-card {
+  list-style: none;
+  padding: 20px;
+  width: calc(50% - 5px);
+  background: #232323;
+  border-radius: 10px;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+.genre-card:hover {
+  background: #393939;
+}
