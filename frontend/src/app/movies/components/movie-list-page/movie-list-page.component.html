@@ -1,0 +1,12 @@
+<h2>MOVIES LIST</h2>
+
+<ul class="movie-list">
+  <li class="movie-card" *ngFor="let m of movies" routerLink="{{ m.id }}">
+    <img class="movie__poster" [src]="m.poster_url" [alt]="m.title" />
+    <div class="movie__info">
+      <p class="movie__rating">⭐ {{ m.rating }}</p>
+      <h3 class="movie__title">{{ m.title }} ({{ m.release_year }})</h3>
+      <button class="movie__watchlist">Watchlist</button>
+    </div>
+  </li>
+</ul>
