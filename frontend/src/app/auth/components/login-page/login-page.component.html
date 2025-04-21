@@ -1,0 +1,9 @@
+<form class="login-form">
+  <label for="">Username</label>
+  <input type="text" name="username" [(ngModel)]="authModel.username" />
+  <label for="">Password</label>
+  <input type="text" name="password" [(ngModel)]="authModel.password" />
+  <button (click)="login()">Login</button>
+
+  <a class="guest-link" routerLink="/genres">Join as a guest</a>
+</form>

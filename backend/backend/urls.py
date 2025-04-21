@@ -17,10 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from api.views import get_movies_by_genre, get_movie_by_id, get_genres;
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/genres/<int:genre_id>/movies/', get_movies_by_genre, name='get_movies_by_genre'),
     path('api/movies/<int:movie_id>/', get_movie_by_id, name='get_movie_by_id'),
     path('api/genres/', get_genres, name='get_genres'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 ]
