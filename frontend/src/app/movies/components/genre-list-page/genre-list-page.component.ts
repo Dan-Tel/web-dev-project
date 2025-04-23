@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgFor } from '@angular/common';
 import { MoviesService } from '../../services/movies/movies.service';
-import { Genre } from '../../models/genre.model';
+import { Genre } from '../../models/movie.model';
 
 @Component({
   selector: 'app-genre-list-page',

@@ -1,0 +1,44 @@
+.admin-form {
+  /* position: absolute; */
+  /* top: 50%; */
+  /* left: 50%; */
+  /* transform: translate(-50%, -50%); */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 450px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #232323;
+}
+
+.admin-form input,
+.admin-form textarea,
+.admin-form select {
+  background: #4a4a4a;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  color: white;
+}
+
+.admin-form button {
+  margin-top: 25px;
+  padding: 10px 15px;
+  background: #99b739;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  font-weight: bold;
+  transition: 0.1s ease;
+  cursor: pointer;
+}
+
+.admin-form button[disabled] {
+  background: gray;
+}
+
+.admin-form button:not[disabled]:hover {
+  background: #b3d349;
+}
