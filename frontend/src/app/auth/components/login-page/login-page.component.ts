@@ -27,8 +27,7 @@ export class LoginPageComponent {
         this.router.navigate(['/genres']);
       },
       (error) => {
-        console.log('CHE TAM SET', error);
-        // REFRESH HERE
+        console.log(error);
       }
     );
   }

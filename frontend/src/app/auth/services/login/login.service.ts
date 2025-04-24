@@ -1,15 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { AuthModel, Token } from '../../models/auth.model';
-import { BehaviorSubject } from 'rxjs';
-import { Router } from '@angular/router';
+import { BehaviorSubject, catchError, EMPTY, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
   private readonly httpClient = inject(HttpClient);
-  private readonly router = inject(Router);
 
   isLoggedIn = new BehaviorSubject<boolean | null>(null);
 
@@ -18,10 +16,19 @@ export class LoginService {
   }
 
   login(authModel: AuthModel) {
-    return this.httpClient.post<Token>(
-      'http://127.0.0.1:8000/api/token/',
-      authModel
-    );
+    return this.httpClient
+      .post<Token>('http://127.0.0.1:8000/api/token/', authModel)
+      .pipe(
+        tap(() => {
+          this.isLoggedIn.next(true);
+        })
+      );
+  }
+
+  logout() {
+    localStorage.removeItem('access');
+    localStorage.removeItem('refresh');
+    this.isLoggedIn.next(false);
   }
 
   autoLogin() {
@@ -31,7 +38,16 @@ export class LoginService {
         .post('http://127.0.0.1:8000/api/token/verify/', {
           token: access,
         })
-        .subscribe(() => this.router.navigate(['/genres']));
+        .subscribe({
+          next: () => {
+            this.isLoggedIn.next(true);
+          },
+          error: () => {
+            this.logout();
+          },
+        });
+    } else {
+      this.logout();
     }
   }
 }
