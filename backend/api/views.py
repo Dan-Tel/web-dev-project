@@ -1,35 +1,24 @@
 from django.http import JsonResponse;
 from rest_framework.decorators import api_view;
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework import status
 from .models import Movie, Genre, Country, ProductionCompany;
-from .serializers import MovieSerializer
+from .serializers import GenreSerializer, MovieSerializer, CountrySerializer, ProductionCompanySerializer
 # Create your views here.
 
 @api_view(['GET'])
 def get_movies_by_genre(request, genre_id):
-  movies = list(Genre.objects.get(pk=genre_id).movies.all().values())
-  return JsonResponse(movies, safe=False)
+  genre = Genre.objects.get(pk=genre_id)
+  movies = genre.movies.all()
+  serializer = MovieSerializer(movies, many=True)
+  return Response(serializer.data)
 
 @api_view(['GET'])
 def get_movie_by_id(request, movie_id):
-  movie = Movie.objects.get(pk=movie_id)
-  
-  movie_data = {
-    "id": movie.id,
-    "title": movie.title,
-    "description": movie.description,
-    "genres": list(movie.genres.values_list("name", flat=True)),
-    "release_year": movie.release_year,
-    "director": movie.director,
-    "duration": movie.duration,
-    "rating": movie.rating,
-    "actors": movie.actors,
-    "poster_url": movie.poster_url,
-    "trailer_url": movie.trailer_url,
-  }
-  
-  return JsonResponse(movie_data)
+    movie = Movie.objects.get(pk=movie_id)
+    serializer = MovieSerializer(movie)
+    return Response(serializer.data)
 
 @api_view(['POST'])
 def add_movie(request):
@@ -41,15 +30,18 @@ def add_movie(request):
 
 @api_view(['GET'])
 def get_genres(request):
-  genres = list(Genre.objects.all().values())
-  return JsonResponse(genres, safe=False)
+  genres = Genre.objects.all()
+  serializer = GenreSerializer(genres, many=True)
+  return Response(serializer.data)
 
-@api_view(['GET'])
-def get_countries(request):
-  countries = list(Country.objects.all().values())
-  return JsonResponse(countries, safe=False)
+class CountryListAPIView(APIView):
+  def get(self, request):
+    countries = Country.objects.all()
+    serializer = CountrySerializer(countries, many=True)
+    return Response(serializer.data)
 
-@api_view(['GET'])
-def get_production_companies(request):
-  production_companies = list(ProductionCompany.objects.all().values())
-  return JsonResponse(production_companies, safe=False)
+class ProductionCompanyListAPIView(APIView):
+  def get(self, request):
+    companies = ProductionCompany.objects.all()
+    serializer = ProductionCompanySerializer(companies, many=True)
+    return Response(serializer.data)

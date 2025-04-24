@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from api.views import get_movies_by_genre, get_movie_by_id, add_movie, get_genres, get_countries, get_production_companies;
+from api.views import get_movies_by_genre, get_movie_by_id, add_movie, get_genres, CountryListAPIView, ProductionCompanyListAPIView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -29,8 +29,8 @@ urlpatterns = [
     path('api/movies/<int:movie_id>/', get_movie_by_id, name='get_movie_by_id'),
     path('api/add-movie/', add_movie, name='add_movie'),
     path('api/genres/', get_genres, name='get_genres'),
-    path('api/production_companies/',get_production_companies, name='get_production_companies'),
-    path('api/countries/', get_countries, name='get_countries'),
+    path('api/production_companies/',CountryListAPIView.as_view(), name='get_production_companies'),
+    path('api/countries/', ProductionCompanyListAPIView.as_view(), name='get_countries'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
